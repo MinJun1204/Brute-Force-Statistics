@@ -1,11 +1,12 @@
 import random, time, string, itertools, math, matplotlib.pyplot as plt
-from statistics import getStat
-from createPassword import createPassword
+from lib.statistics import getStat
+from lib.createPassword import createPassword
 
-times = 100
-digit = 4
-option = 'NALU'
-pool = string.digits + string.ascii_lowercase + string.ascii_uppercase
+times = 1000
+digit = 3
+option = 'NALUS'
+# pool = string.digits + string.ascii_lowercase + string.ascii_uppercase
+pool = string.printable
 # pool = string.ascii_lowercase
 arr = []
 codeStart = time.time()
@@ -27,7 +28,7 @@ for i in range(times):
 
     index = 0
     while True:
-        temp = numeral_system(index, 26, digit)
+        temp = numeral_system(index, 100, digit)
         key = ''
         for j in temp[::-1]:
             key += pool[j]
@@ -49,15 +50,15 @@ codeElapsed = codeEnd - codeStart
 print('%s%s_S Total Elapsed : %fs' % (digit, option, codeElapsed))
 getStat(arr)
 
-plt.hist(arr, bins=1000, color='#E35F62')
+plt.hist(arr, bins=500, color='#E35F62')
 
-plt.title('%d ASCII Lowercase / %d Times' % (digit, times))
+plt.title('%d ASCII + Numbers + Special Characters (Sequential) / %d Times' % (digit, times))
 plt.xlabel('Elapsed Time (s)')
 plt.ylabel('Frequency')
 
 plt.show()
 
-f = open('./%s%s_S.txt' % (digit, option), 'w')
+f = open('./%s/%s%s_S.txt' % (option, digit, option), 'w')
 for line in arr:
     f.write(str(line) + '\n')
 f.close()

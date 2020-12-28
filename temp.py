@@ -1,4 +1,4 @@
 import random, string
 
 temp = string.printable
-print(len(temp))
+print(list(temp))
