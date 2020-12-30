@@ -18,4 +18,4 @@ def createPassword(opt, digit):
     for i in range(digit):
         result += random.choice(pool)
 
-    return result.zfill(digit)
+    return result

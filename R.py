@@ -1,4 +1,4 @@
-import random, time, math, matplotlib.pyplot as plt
+import time, matplotlib.pyplot as plt
 from lib.statistics import getStat
 from lib.createPassword import createPassword
 

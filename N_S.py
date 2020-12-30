@@ -1,9 +1,9 @@
-import random, time, math, matplotlib.pyplot as plt
-from statistics import getStat
-from createPassword import createPassword
+import time, matplotlib.pyplot as plt
+from lib.statistics import getStat
+from lib.createPassword import createPassword
 
 times = 1000
-digit = 7
+digit = 4
 option = 'N'
 arr = []
 codeStart = time.time()
@@ -20,8 +20,7 @@ for i in range(times):
             elapsed = end - start
             arr.append(elapsed)
 
-            if i % 50 == 0:
-                print('[%s] Solved : %s - %fs' % (i + 1, key, elapsed))
+            print('[%s] Solved : %s - %fs' % (i + 1, key, elapsed))
             break
 
 codeEnd = time.time()
@@ -38,7 +37,7 @@ plt.ylabel('Frequency')
 
 plt.show()
 
-f = open('./%s%s_S.txt' % (digit, option), 'w')
+f = open('./Result/%s/%s%s_S.txt' % (option, digit, option), 'w')
 for line in arr:
     f.write(str(line) + '\n')
 f.close()

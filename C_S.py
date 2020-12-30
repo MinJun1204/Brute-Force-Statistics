@@ -1,26 +1,32 @@
-import random, time, string, itertools, math, matplotlib.pyplot as plt
+import time, string, matplotlib.pyplot as plt
 from lib.statistics import getStat
 from lib.createPassword import createPassword
 
-times = 1000
+times = 100000
 digit = 3
 option = 'NALUS'
-# pool = string.digits + string.ascii_lowercase + string.ascii_uppercase
-pool = string.printable
-# pool = string.ascii_lowercase
+
+if option == 'AL':
+    pool = string.ascii_lowercase
+elif option == 'NALU':
+    pool = string.digits + string.ascii_lowercase + string.ascii_uppercase
+elif option == 'NALUS':
+    pool = string.printable
+
 arr = []
 codeStart = time.time()
 
 def numeral_system(number, base, digit):
-    arr = []
+    result = []
     x = number
     for i in range(digit):
         div = x // base
         mod = x % base
         x = div
-        arr.append(mod)
+        result.append(mod)
+        result.reverse()
 
-    return arr
+    return result
 
 for i in range(times):
     password = createPassword(option, digit)
@@ -30,9 +36,8 @@ for i in range(times):
     while True:
         temp = numeral_system(index, 100, digit)
         key = ''
-        for j in temp[::-1]:
+        for j in temp:
             key += pool[j]
-        # print(key)
         
         if key == password:
             end = time.time()
@@ -58,7 +63,7 @@ plt.ylabel('Frequency')
 
 plt.show()
 
-f = open('./%s/%s%s_S.txt' % (option, digit, option), 'w')
+f = open('./Result/%s/%s%s_S.txt' % (option, digit, option), 'w')
 for line in arr:
     f.write(str(line) + '\n')
 f.close()
